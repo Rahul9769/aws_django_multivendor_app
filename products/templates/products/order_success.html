@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+{% block title %} Order success page
+{% endblock %}
+
+{% block content %}
+    <h1>Your order placed successfully</h1>
+    <p>Your cart has been cleared. Thank you for shopping! </p>
+    <a href="{% url 'home' %}">Continue Shopping</a>
+{% endblock %}

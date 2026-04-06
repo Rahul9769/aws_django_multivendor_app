@@ -1,0 +1,64 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Category Detail{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Category: {{ category.name }}</h2>
+
+    <p><strong>Description:</strong> {{ category.description }}</p>
+    <p><strong>Vendor:</strong> {{ category.vendor.first_name }} {{ category.vendor.last_name }}</p>
+
+    <h3 class="mt-4">Products in this category</h3>
+
+    {% if products %}
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        {% if request.user.role == 'vendor' and category.vendor == request.user %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.title }}" width="80" class="img-thumbnail">
+                                {% else %}
+                                    No image
+                                {% endif %}
+                            </td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.quantity }}</td>
+                            {% if request.user.role == 'vendor' and category.vendor == request.user %}
+                                <td>
+                                    <a href="{% url 'update_product' product.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-3">
+            No products in this category yet.
+            <a href="{% url 'create_product' category.id %}" class="btn btn-sm btn-success ms-2">Add Product</a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

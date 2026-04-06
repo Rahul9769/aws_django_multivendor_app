@@ -1,0 +1,20 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="p-4 bg-light border rounded text-center">
+
+        <h2 class="mb-3">Customer Dashboard</h2>
+
+        <p>Welcome, <strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong></p>
+
+        <a href="{% url 'cart_view' %}" class="btn btn-primary mt-2">Check Your Cart</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

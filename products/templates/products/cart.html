@@ -1,0 +1,55 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Your Cart</h2>
+
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.title }}</td>
+                            <td>
+                                {% if item.image_url %}
+                                    <img src="{{ item.image_url }}" width="80" class="img-thumbnail">
+                                {% else %}
+                                    No Image
+                                {% endif %}
+                            </td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.subtotal|floatformat:2 }}</td>
+                            <td>
+                                <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-3">
+            <h4>Total: {{ total|floatformat:2 }}</h4>
+            <a href="{% url 'place_order' %}" class="btn btn-success mt-2">
+                Place Order
+            </a>
+        </div>
+
+    {% else %}
+        <div class="alert alert-info">Your cart is empty.</div>
+    {% endif %}
+</div>
+{% endblock %}

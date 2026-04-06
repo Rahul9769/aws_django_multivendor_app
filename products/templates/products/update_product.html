@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4" style="max-width: 500px;">
+
+    <h2 class="mb-3">Update Product: {{ product.title }}</h2>
+
+    <form method="post" enctype="multipart/form-data" class="border p-3 rounded bg-light">
+        {% csrf_token %}
+
+        <!-- Current image preview -->
+        {% if product.image %}
+            <div class="mb-3">
+                <p>Current Image:</p>
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-thumbnail" width="100">
+            </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary w-100">Update Product</button>
+    </form>
+
+</div>
+
+{% endblock %}

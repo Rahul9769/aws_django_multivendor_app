@@ -1,0 +1,27 @@
+
+asgiref==3.11.0
+Django==5.2.9
+sqlparse==0.5.4
+tzdata==2025.2
+
+
+djangorestframework==3.16.1
+djangorestframework_simplejwt==5.5.1
+PyJWT==2.10.1
+
+
+mysqlclient==2.2.7
+
+
+pillow==12.0.0
+
+
+python-dotenv==1.2.1
+
+
+gunicorn==21.2.0           # Production WSGI server
+whitenoise==6.8.2          # Serve static files without nginx
+django-cors-headers==4.7.0 # Allow frontend to call API
+
+django-storages==1.14.4
+boto3==1.35.0

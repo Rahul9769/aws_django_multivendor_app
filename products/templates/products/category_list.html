@@ -1,0 +1,57 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Categories</h2>
+
+    {% if categories %}
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Vendor</th>
+                        {% if request.user.role == 'vendor' %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'category_detail' category.id %}" class="text-decoration-none">
+                                    {{ category.name }}
+                                </a>
+                            </td>
+                            <td>{{ category.description }}</td>
+                            <td>{{ category.vendor.first_name }} {{ category.vendor.last_name }}</td>
+
+                            {% if request.user.role == 'vendor' %}
+                                <td>
+                                    <a href="{% url 'create_product' category.id %}" class="btn btn-sm btn-success mb-1">Add Product</a>
+                                    <a href="{% url 'update_category' category.id %}" class="btn btn-sm btn-primary mb-1">Update</a>
+                                    <a href="{% url 'delete_category' category.id %}" class="btn btn-sm btn-danger mb-1">Delete</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No categories available.
+            {% if request.user.role == 'vendor' %}
+                <a href="{% url 'create_category' %}" class="btn btn-sm btn-success ms-2">Add a Category</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html' %}
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">My Orders</h2>
+
+    {% if orders %}
+        <div class="list-group">
+            {% for order in orders %}
+                <a href="{% url 'order_detail' order.id %}" class="list-group-item list-group-item-action">
+                    <strong>Order #{{ order.id }}</strong>
+                    <span class="text-muted">— {{ order.created_at|date:"M d, Y H:i" }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">You have no orders yet.</div>
+    {% endif %}
+</div>
+{% endblock %}
