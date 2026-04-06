@@ -42,8 +42,7 @@ Edit `.env` and set:
 
 ### 3. Create MySQL database
 ```sql
-CREATE DATABASE multivendor_ecommerce_django CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
+CREATE DATABASE multivendor_ecommerce_django;```
 
 ### 4. Run migrations & start server
 ```bash
@@ -80,7 +79,7 @@ Admin panel: `http://localhost:8000/admin/`
 See full step-by-step guide: [AWS_DEPLOYMENT_GUIDE.md](AWS_DEPLOYMENT_GUIDE.md)
 
 Quick summary:
-1. Launch EC2 (Ubuntu 22.04) + RDS MySQL
+1. Launch EC2 (Amazon Linux 2023 + RDS MySQL
 2. SSH into EC2, clone repo, set up venv
 3. Copy `.env.example` → `.env`, fill AWS/RDS values
 4. Run `bash deploy.sh`
